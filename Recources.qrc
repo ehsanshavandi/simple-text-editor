@@ -10,5 +10,6 @@
         <file>images/selectAll.png</file>
         <file>images/selectNone.png</file>
         <file>images/save.png</file>
+        <file>images/replace.png</file>
     </qresource>
 </RCC>

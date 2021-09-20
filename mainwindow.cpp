@@ -110,6 +110,36 @@ void MainWindow::selectNone()
   ui->plainTextEdit->setTextCursor(cursor);
 }
 
+void MainWindow::findAndReplace()
+{
+  FindAndReplace* dlg = new FindAndReplace(this);
+
+  if (!dlg->exec()) return;
+
+  if (dlg->replaceAll())
+  {
+    // replace all
+    QString text = ui->plainTextEdit->toPlainText();
+    text = text.replace(dlg->TextToFind(), dlg->TextToReplace());
+    ui->plainTextEdit->setPlainText(text);
+  }
+  else
+  {
+    // replace one
+    // first find
+    bool value = ui->plainTextEdit->find(dlg->TextToFind());
+
+    if (!value)
+    {
+      QMessageBox::information(this, "Not Found", "Was not able to find " + dlg->TextToFind());
+      return;
+    }
+
+    QTextCursor cursor = ui->plainTextEdit->textCursor();
+    cursor.insertText(dlg->TextToReplace());
+  }
+}
+
 void MainWindow::toolbarTop()
 {
   addToolBar(Qt::ToolBarArea::TopToolBarArea, ui->toolBar);
@@ -217,6 +247,7 @@ void MainWindow::createSignalSlots()
   connect(ui->actionToolbar_bottom, &QAction::triggered, this, &MainWindow::toolbarBottom);
   connect(ui->actionToolbar_left, &QAction::triggered, this, &MainWindow::toolbarLeft);
   connect(ui->actionToolbar_right, &QAction::triggered, this, &MainWindow::toolbarRight);
+  connect(ui->actionFindAndReplace, &QAction::triggered, this, &MainWindow::findAndReplace);
 }
 
 void MainWindow::setPlainTextToCentralWidget()

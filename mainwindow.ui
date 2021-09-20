@@ -47,6 +47,7 @@
     <addaction name="actionCopy"/>
     <addaction name="actionCut"/>
     <addaction name="actionPaste"/>
+    <addaction name="actionFindAndReplace"/>
     <addaction name="separator"/>
     <addaction name="actionSelect_None"/>
     <addaction name="actionSelect_All"/>
@@ -85,6 +86,7 @@
    <addaction name="actionCopy"/>
    <addaction name="actionCut"/>
    <addaction name="actionPaste"/>
+   <addaction name="actionFindAndReplace"/>
   </widget>
   <action name="actionNew">
    <property name="icon">
@@ -210,6 +212,18 @@
    </property>
    <property name="text">
     <string>Floatable toolbar</string>
+   </property>
+  </action>
+  <action name="actionFindAndReplace">
+   <property name="icon">
+    <iconset resource="Recources.qrc">
+     <normaloff>:/files/images/replace.png</normaloff>:/files/images/replace.png</iconset>
+   </property>
+   <property name="text">
+    <string>FindAndReplace</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
    </property>
   </action>
  </widget>

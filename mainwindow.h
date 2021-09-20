@@ -10,6 +10,7 @@
 #include <QStatusBar>
 #include <QShortcut>
 #include <QDebug>
+#include <findandreplace.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -30,6 +31,7 @@ class MainWindow : public QMainWindow {
   void saveFileAs();
   void openFile();
   void selectNone();
+  void findAndReplace();
   void toolbarTop();
   void toolbarBottom();
   void toolbarLeft();
@@ -37,9 +39,7 @@ class MainWindow : public QMainWindow {
 
 
   void on_actionMovable_toolbar_toggled(bool arg1);
-
   void on_actionFloatable_toolbar_toggled(bool arg1);
-
   void on_plainTextEdit_textChanged();
 
  private:
