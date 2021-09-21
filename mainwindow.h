@@ -53,6 +53,7 @@ class MainWindow : public QMainWindow {
   bool m_saved;
   int m_zoomOutCounter;
   int m_zoomInCounter;
+  const int MAX_ZOOM;
 
   void init();
   void setupStatusbar();

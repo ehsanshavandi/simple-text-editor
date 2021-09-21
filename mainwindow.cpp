@@ -3,7 +3,7 @@
 
 MainWindow::MainWindow(QWidget* parent)
   : QMainWindow(parent)
-  , ui(new Ui::MainWindow)
+  , ui(new Ui::MainWindow), MAX_ZOOM(15)
 {
   ui->setupUi(this);
   init();
@@ -94,10 +94,7 @@ void MainWindow::openFile()
   if (temp.isEmpty()) return;
 
   m_fileName = temp;
-  qInfo() << m_fileName;
   QFile file(m_fileName);
-
-  qInfo() << file.errorString();
 
   if (!file.open(QIODevice::ReadOnly))
   {
@@ -155,7 +152,7 @@ void MainWindow::findAndReplace()
 
 void MainWindow::zoomIn()
 {
-  if (m_zoomInCounter >= 15)
+  if (m_zoomInCounter >= MAX_ZOOM)
   {
     QMessageBox::information(this, "Coution", "Too much large");
     return;
@@ -168,7 +165,7 @@ void MainWindow::zoomIn()
 
 void MainWindow::zoomOut()
 {
-  if ( m_zoomOutCounter >= 15)
+  if ( m_zoomOutCounter >= MAX_ZOOM)
   {
     QMessageBox::information(this, "Coution", "Too much small");
     return;
@@ -232,12 +229,10 @@ void MainWindow::setupStatusbar()
 
 void MainWindow::updateStatus(QString message)
 {
-  qDebug() << " ***********************";
   QList<QLabel*> lableList;
 
   foreach (QObject* obj, ui->statusbar->children())
   {
-    qDebug() << obj->objectName();
 
     if (obj->objectName().contains("lblIcon"))
       lableList.push_back(qobject_cast<QLabel*>(obj));
