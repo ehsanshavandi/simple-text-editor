@@ -60,8 +60,13 @@
     <addaction name="actionToolbar_bottom"/>
     <addaction name="actionToolbar_left"/>
     <addaction name="actionToolbar_right"/>
+    <addaction name="separator"/>
+    <addaction name="separator"/>
     <addaction name="actionMovable_toolbar"/>
     <addaction name="actionFloatable_toolbar"/>
+    <addaction name="actionzoom_in"/>
+    <addaction name="separator"/>
+    <addaction name="actionzoom_out"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -87,6 +92,8 @@
    <addaction name="actionCut"/>
    <addaction name="actionPaste"/>
    <addaction name="actionFindAndReplace"/>
+   <addaction name="actionzoom_in"/>
+   <addaction name="actionzoom_out"/>
   </widget>
   <action name="actionNew">
    <property name="icon">
@@ -224,6 +231,24 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionzoom_in">
+   <property name="icon">
+    <iconset resource="Recources.qrc">
+     <normaloff>:/files/images/zoom-in.png</normaloff>:/files/images/zoom-in.png</iconset>
+   </property>
+   <property name="text">
+    <string>zoom in</string>
+   </property>
+  </action>
+  <action name="actionzoom_out">
+   <property name="icon">
+    <iconset resource="Recources.qrc">
+     <normaloff>:/files/images/zoom-out.png</normaloff>:/files/images/zoom-out.png</iconset>
+   </property>
+   <property name="text">
+    <string>zoom out</string>
    </property>
   </action>
  </widget>

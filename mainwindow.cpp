@@ -6,7 +6,17 @@ MainWindow::MainWindow(QWidget* parent)
   , ui(new Ui::MainWindow)
 {
   ui->setupUi(this);
+  init();
 
+}
+
+MainWindow::~MainWindow()
+{
+  delete ui;
+}
+
+void MainWindow::init()
+{
   // conncet signal to slots
   createSignalSlots();
 
@@ -15,18 +25,21 @@ MainWindow::MainWindow(QWidget* parent)
 
   // set up status bar
   setupStatusbar();
+
   // set to plain text to central widget
   setPlainTextToCentralWidget();
 
   // make new file
   newFile();
   m_saved = true;
+
+  // initialize zoomOutCounter
+  m_zoomOutCounter = 0;
+
+  // initialize zoomOutCounter
+  m_zoomInCounter = 0;
 }
 
-MainWindow::~MainWindow()
-{
-  delete ui;
-}
 
 void MainWindow::newFile()
 {
@@ -140,6 +153,32 @@ void MainWindow::findAndReplace()
   }
 }
 
+void MainWindow::zoomIn()
+{
+  if (m_zoomInCounter >= 15)
+  {
+    QMessageBox::information(this, "Coution", "Too much large");
+    return;
+  }
+
+  ui->plainTextEdit->zoomIn(1);
+  ++m_zoomInCounter;
+  --m_zoomOutCounter;
+}
+
+void MainWindow::zoomOut()
+{
+  if ( m_zoomOutCounter >= 15)
+  {
+    QMessageBox::information(this, "Coution", "Too much small");
+    return;
+  }
+
+  ui->plainTextEdit->zoomOut(1);
+  ++m_zoomOutCounter;
+  --m_zoomInCounter;
+}
+
 void MainWindow::toolbarTop()
 {
   addToolBar(Qt::ToolBarArea::TopToolBarArea, ui->toolBar);
@@ -243,6 +282,8 @@ void MainWindow::createSignalSlots()
   connect(ui->actionPaste, &QAction::triggered, ui->plainTextEdit, &QPlainTextEdit::paste);
   connect(ui->actionSelect_All, &QAction::triggered, ui->plainTextEdit, &QPlainTextEdit::selectAll);
   connect(ui->actionSelect_None, &QAction::triggered, this, &MainWindow::selectNone);
+  connect(ui->actionzoom_in, &QAction::triggered, this, &MainWindow::zoomIn);
+  connect(ui->actionzoom_out, &QAction::triggered, this, &MainWindow::zoomOut);
   connect(ui->actionToolbar_top, &QAction::triggered, this, &MainWindow::toolbarTop);
   connect(ui->actionToolbar_bottom, &QAction::triggered, this, &MainWindow::toolbarBottom);
   connect(ui->actionToolbar_left, &QAction::triggered, this, &MainWindow::toolbarLeft);
@@ -280,3 +321,4 @@ void MainWindow::on_plainTextEdit_textChanged()
     updateStatus(m_fileName);
   }
 }
+

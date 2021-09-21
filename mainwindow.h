@@ -10,6 +10,8 @@
 #include <QStatusBar>
 #include <QShortcut>
 #include <QDebug>
+#include <QColorDialog>
+#include <QtMath>
 #include <findandreplace.h>
 
 QT_BEGIN_NAMESPACE
@@ -32,6 +34,8 @@ class MainWindow : public QMainWindow {
   void openFile();
   void selectNone();
   void findAndReplace();
+  void zoomIn();
+  void zoomOut();
   void toolbarTop();
   void toolbarBottom();
   void toolbarLeft();
@@ -47,7 +51,10 @@ class MainWindow : public QMainWindow {
 
   QString m_fileName;
   bool m_saved;
+  int m_zoomOutCounter;
+  int m_zoomInCounter;
 
+  void init();
   void setupStatusbar();
   void updateStatus(QString message);
   void createSignalSlots();

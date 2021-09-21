@@ -11,5 +11,8 @@
         <file>images/selectNone.png</file>
         <file>images/save.png</file>
         <file>images/replace.png</file>
+        <file>images/color.png</file>
+        <file>images/zoom-in.png</file>
+        <file>images/zoom-out.png</file>
     </qresource>
 </RCC>
